@@ -1,5 +1,5 @@
 import flask
-from flask import request,jsonify,send_from_directory,send_file
+from flask import request,jsonify,send_from_directory,send_file, redirect
 import numpy as np
 # importing Qiskit
 from qiskit import BasicAer, IBMQ
@@ -29,6 +29,9 @@ API_url = '/static/bv_api_new.json'
 swagger_ui_blueprint = get_swaggerui_blueprint(swagger_url,API_url,config={'app_name':'QuLib'})
 app.register_blueprint(swagger_ui_blueprint, url_prefix=swagger_url)
 
+@app.route('/',methods=['GET'])
+def index():
+    return redirect('/home')
 
 @app.route('/demo/get_BV_oracle',methods=['GET'])
 def build_BV_oracle():
